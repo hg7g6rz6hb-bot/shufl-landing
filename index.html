@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shufl — Get more from every card in your wallet</title>
+  <meta name="description" content="Shufl helps you track cards, monitor bonuses, understand 5/24, and know which card to use — all in one calm, simple app." />
+
+  <style>
+    :root {
+      --navy: #0B1220;
+      --blue: #1F5FBF;
+      --soft-blue: #EAF2FF;
+      --text: #0B1220;
+      --muted: #566174;
+      --border: #E1E7F0;
+      --white: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 35%, rgba(31, 95, 191, 0.13), transparent 34%),
+        radial-gradient(circle at 82% 72%, rgba(11, 18, 32, 0.08), transparent 36%),
+        linear-gradient(135deg, #FFFFFF 0%, #F8FAFD 55%, #EEF5FF 100%);
+    }
+
+    body { overflow: hidden; }
+
+    .page {
+      height: 100vh;
+      width: 100vw;
+      padding: 28px 42px 22px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    header, footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.055em;
+    }
+
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: var(--navy);
+      box-shadow: 0 14px 32px rgba(11, 18, 32, 0.18);
+    }
+
+    .support {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1240px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 80px;
+      min-height: 0;
+    }
+
+    .phone-stage {
+      display: grid;
+      place-items: center;
+      min-height: 620px;
+      position: relative;
+    }
+
+    .phone-glow {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      border-radius: 999px;
+      background: rgba(31, 95, 191, 0.15);
+      filter: blur(42px);
+    }
+
+    .phone {
+      width: min(335px, 32vw);
+      min-width: 300px;
+      aspect-ratio: 0.49;
+      border-radius: 50px;
+      padding: 12px;
+      background: #0B1220;
+      box-shadow:
+        0 44px 90px rgba(11, 18, 32, 0.34),
+        inset 0 0 0 1px rgba(255,255,255,0.14);
+      position: relative;
+      z-index: 2;
+    }
+
+    .screen {
+      height: 100%;
+      background: #fff;
+      border-radius: 39px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .notch {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 96px;
+      height: 27px;
+      border-radius: 999px;
+      background: #0B1220;
+      z-index: 3;
+    }
+
+    .mock-screen {
+      height: 100%;
+      padding: 62px 20px 88px;
+      background: linear-gradient(#fff, #F7F9FC);
+    }
+
+    .screen-title {
+      font-size: 26px;
+      line-height: 1;
+      font-weight: 850;
+      letter-spacing: -0.055em;
+      margin-bottom: 8px;
+    }
+
+    .screen-subtitle {
+      color: #697386;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .card {
+      min-height: 140px;
+      border-radius: 22px;
+      padding: 20px;
+      color: white;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(31, 95, 191, 0.45), transparent 42%),
+        linear-gradient(135deg, #0B1220, #101B34);
+      margin-bottom: 14px;
+      box-shadow: 0 18px 36px rgba(11,18,32,0.24);
+    }
+
+    .card-label {
+      font-size: 12px;
+      opacity: .72;
+      letter-spacing: .03em;
+      margin-bottom: 34px;
+    }
+
+    .card-name {
+      font-size: 18px;
+      font-weight: 780;
+      letter-spacing: -.035em;
+      margin-bottom: 24px;
+    }
+
+    .card-digits {
+      font-size: 13px;
+      opacity: .82;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .mini {
+      border: 1px solid #E7ECF4;
+      border-radius: 18px;
+      padding: 14px;
+      background: white;
+      box-shadow: 0 10px 24px rgba(11,18,32,0.05);
+    }
+
+    .mini-label {
+      font-size: 12px;
+      color: #637083;
+      margin-bottom: 8px;
+    }
+
+    .mini-value {
+      font-size: 24px;
+      font-weight: 850;
+      letter-spacing: -.05em;
+    }
+
+    .recommend {
+      border-radius: 20px;
+      background: #EEF5FF;
+      border: 1px solid #DCE9FF;
+      padding: 15px 16px;
+    }
+
+    .recommend-title {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .recommend-copy {
+      font-size: 12px;
+      line-height: 1.35;
+      color: #58657A;
+    }
+
+    .tabs {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 70px;
+      background: rgba(255,255,255,.94);
+      border-top: 1px solid #EBEEF4;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+      padding: 0 10px;
+    }
+
+    .tab {
+      text-align: center;
+      font-size: 10px;
+      color: #7A8495;
+      font-weight: 650;
+    }
+
+    .tab-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      background: #EAF2FF;
+      margin: 0 auto 5px;
+    }
+
+    .tab.active { color: var(--blue); }
+    .tab.active .tab-icon { background: var(--blue); }
+
+    .copy {
+      position: relative;
+      max-width: 720px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: var(--soft-blue);
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 820;
+      letter-spacing: .01em;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 22px;
+      font-size: clamp(56px, 5.4vw, 82px);
+      line-height: .96;
+      letter-spacing: -.08em;
+      color: var(--navy);
+    }
+
+    h1 .blue { color: var(--blue); }
+
+    .subhead {
+      margin: 0 0 32px;
+      font-size: 22px;
+      line-height: 1.38;
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    .panel {
+      display: none;
+      grid-template-columns: 54px 1fr;
+      gap: 18px;
+      align-items: start;
+      max-width: 600px;
+      margin-bottom: 26px;
+    }
+
+    .panel.active {
+      display: grid;
+      animation: fadeUp .28s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #EAF2FF;
+      color: var(--blue);
+      font-weight: 850;
+      font-size: 22px;
+    }
+
+    .panel h2 {
+      margin: 0 0 6px;
+      font-size: 21px;
+      line-height: 1.15;
+      letter-spacing: -.035em;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.43;
+    }
+
+    .cta {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 260px;
+      height: 58px;
+      padding: 0 26px;
+      border-radius: 16px;
+      background: var(--navy);
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 820;
+      letter-spacing: -.035em;
+      box-shadow: 0 20px 48px rgba(11,18,32,.22);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 56px rgba(11,18,32,.28);
+    }
+
+    .free-note {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .dots {
+      position: absolute;
+      right: -42px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      gap: 18px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border: 0;
+      padding: 0;
+      border-radius: 50%;
+      background: #C5CBD5;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background: var(--blue);
+      transform: scale(1.12);
+    }
+
+    footer {
+      border-top: 1px solid rgba(11,18,32,.10);
+      padding-top: 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover, .support:hover {
+      color: var(--navy);
+    }
+
+    @media (max-width: 940px) {
+      body { overflow: auto; }
+
+      .page {
+        height: auto;
+        min-height: 100vh;
+        padding: 22px 20px;
+      }
+
+      main {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 32px 0 36px;
+      }
+
+      .phone-stage {
+        min-height: 450px;
+        order: -1;
+      }
+
+      .phone {
+        width: 250px;
+        min-width: 250px;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      .subhead {
+        font-size: 18px;
+      }
+
+      .dots {
+        position: static;
+        transform: none;
+        display: flex;
+        margin: 20px 0 0;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-height: 760px) and (min-width: 941px) {
+      .page { padding-top: 18px; padding-bottom: 16px; }
+      .phone-stage { min-height: 520px; }
+      .phone { width: 285px; min-width: 285px; }
+      h1 { font-size: 62px; }
+      .subhead { font-size: 19px; margin-bottom: 24px; }
+      .eyebrow { margin-bottom: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <img class="brand-logo" src="assets/shufl-logo.png" alt="Shufl logo" />
+        <span>shufl</span>
+      </div>
+
+      <a class="support" href="mailto:support@shuflcredit.app">support@shuflcredit.app</a>
+    </header>
+
+    <main>
+      <section class="phone-stage" aria-label="Shufl app preview">
+        <div class="phone-glow"></div>
+
+        <div class="phone">
+          <div class="screen">
+            <div class="notch"></div>
+
+            <div class="mock-screen">
+              <div class="screen-title">Cards</div>
+              <div class="screen-subtitle">Your wallet, organized.</div>
+
+              <div class="card">
+                <div class="card-label">SHUFL WALLET</div>
+                <div class="card-name">Premium Rewards Card</div>
+                <div class="card-digits">•••• 1234</div>
+              </div>
+
+              <div class="mini-grid">
+                <div class="mini">
+                  <div class="mini-label">5/24 Status</div>
+                  <div class="mini-value">2/5</div>
+                </div>
+                <div class="mini">
+                  <div class="mini-label">Bonus Tracker</div>
+                  <div class="mini-value">42d</div>
+                </div>
+              </div>
+
+              <div class="recommend">
+                <div class="recommend-title">Best card for dining</div>
+                <div class="recommend-copy">Use your strongest rewards card for this category.</div>
+              </div>
+            </div>
+
+            <div class="tabs">
+              <div class="tab active"><div class="tab-icon"></div>Cards</div>
+              <div class="tab"><div class="tab-icon"></div>Stack</div>
+              <div class="tab"><div class="tab-icon"></div>Optimize</div>
+              <div class="tab"><div class="tab-icon"></div>Profile</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="copy" aria-label="Shufl overview">
+        <div class="eyebrow">Credit card optimization, simplified</div>
+
+        <h1>Get more from <span class="blue">every</span> card in your wallet.</h1>
+
+        <p class="subhead">
+          Shufl helps you track cards, monitor bonuses, understand 5/24, and know which card to use — all in one calm, simple app.
+        </p>
+
+        <div class="panels">
+          <article class="panel active">
+            <div class="panel-icon">1</div>
+            <div>
+              <h2>Track every card</h2>
+              <p>Organize personal and business cards, annual fees, open dates, and bonus deadlines.</p>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-icon">2</div>
+            <div>
+              <h2>Know which card to use</h2>
+              <p>See the best card for each spending category using clear, deterministic logic.</p>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-icon">3</div>
+            <div>
+              <h2>Stay under 5/24</h2>
+              <p>Monitor your card opening history and plan future applications with more confidence.</p>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-icon">4</div>
+            <div>
+              <h2>Follow high-signal updates</h2>
+              <p>Shufl Stack surfaces curated credit card signals without noisy sales clutter.</p>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-icon">5</div>
+            <div>
+              <h2>Optimize as a household</h2>
+              <p>Coordinate cards with your partner and understand who should pay.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="cta">
+          <a class="download" href="PASTE_YOUR_APP_STORE_LINK_HERE">Download Shufl</a>
+          <span class="free-note">Free on the App Store.</span>
+        </div>
+
+        <nav class="dots" aria-label="Feature navigation">
+          <button class="dot active" aria-label="Track every card"></button>
+          <button class="dot" aria-label="Know which card to use"></button>
+          <button class="dot" aria-label="Stay under 5/24"></button>
+          <button class="dot" aria-label="Follow high-signal updates"></button>
+          <button class="dot" aria-label="Optimize as a household"></button>
+        </nav>
+      </section>
+    </main>
+
+    <footer>
+      <div>© 2026 Shufl, Inc. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+        <a href="mailto:support@shuflcredit.app">Support</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const panels = Array.from(document.querySelectorAll(".panel"));
+    const dots = Array.from(document.querySelectorAll(".dot"));
+    let activeIndex = 0;
+    let timer;
+
+    function showPanel(index) {
+      activeIndex = index;
+      panels.forEach((panel, i) => panel.classList.toggle("active", i === index));
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+      resetTimer();
+    }
+
+    function nextPanel() {
+      showPanel((activeIndex + 1) % panels.length);
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(nextPanel, 4200);
+    }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => showPanel(index));
+    });
+
+    resetTimer();
+  </script>
+</body>
+</html>
