@@ -3,25 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Shufl Credit — Get more from every card in your wallet</title>
-  <meta name="description" content="Shufl helps you track cards, monitor bonuses, understand 5/24, and know which card to use — all in one calm, simple app." />
+
+  <meta
+    name="description"
+    content="Shufl helps you track cards, monitor bonuses, understand 5/24, and know which card to use — all in one calm, simple app."
+  />
 
   <style>
+
     :root{
       --navy:#0B1220;
       --blue:#1F5FBF;
       --soft-blue:#EAF2FF;
       --text:#0B1220;
       --muted:#566174;
-      --border:#E2E8F0;
     }
-
-    .real-screen{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
 
     *{
       box-sizing:border-box;
@@ -31,11 +29,20 @@
     body{
       margin:0;
       min-height:100%;
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       color:var(--text);
+
       background:
-        radial-gradient(circle at 18% 36%,rgba(31,95,191,.14),transparent 34%),
-        radial-gradient(circle at 82% 72%,rgba(11,18,32,.08),transparent 36%),
+        radial-gradient(circle at 18% 36%, rgba(31,95,191,.14), transparent 34%),
+        radial-gradient(circle at 82% 72%, rgba(11,18,32,.08), transparent 36%),
         linear-gradient(135deg,#fff 0%,#F8FAFD 56%,#EEF5FF 100%);
     }
 
@@ -44,9 +51,8 @@
     }
 
     .page{
-      height:100vh;
-      width:100vw;
-      padding:28px 42px 20px;
+      min-height:100vh;
+      padding:28px 42px 22px;
       display:grid;
       grid-template-rows:auto 1fr auto;
     }
@@ -56,36 +62,17 @@
       display:flex;
       justify-content:space-between;
       align-items:center;
-      position:relative;
-      z-index:5;
     }
 
     .brand{
       display:flex;
       align-items:center;
       gap:14px;
-      font-size:26px;
-      font-weight:850;
-      letter-spacing:-0.05em;
-      color:var(--navy);
     }
 
-    .brand-logo-wrap{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#0B1220;
-      box-shadow:0 10px 24px rgba(11,18,32,.14);
-    }
-
-    .brand-logo{
-      width:100%;
-      height:100%;
-      object-fit:contain;
+    .brand img{
+      height:36px;
+      width:auto;
       display:block;
     }
 
@@ -97,237 +84,74 @@
     }
 
     main{
-      max-width:1320px;
-      margin:0 auto;
+      max-width:1280px;
       width:100%;
+      margin:0 auto;
+
       display:grid;
-      grid-template-columns:.92fr 1.08fr;
+      grid-template-columns:.9fr 1.1fr;
       align-items:center;
-      gap:56px;
-      min-height:0;
+      gap:88px;
     }
 
     .phone-stage{
+      position:relative;
       display:grid;
       place-items:center;
-      min-height:560px;
-      position:relative;
-      transform:scale(.92);
+      min-height:640px;
     }
 
     .phone-glow{
       position:absolute;
-      width:460px;
-      height:460px;
+      width:480px;
+      height:480px;
       border-radius:999px;
-      background:rgba(31,95,191,.14);
+      background:rgba(31,95,191,.12);
       filter:blur(44px);
     }
 
     .phone-shadow{
       position:absolute;
-      bottom:16px;
+      bottom:22px;
       width:310px;
-      height:30px;
-      border-radius:50%;
-      background:rgba(11,18,32,.2);
-      filter:blur(20px);
+      height:32px;
+      border-radius:999px;
+      background:rgba(11,18,32,.18);
+      filter:blur(22px);
       z-index:1;
     }
 
     .phone{
-      width:min(350px,32vw);
-      min-width:310px;
+      width:min(360px,32vw);
+      min-width:320px;
       aspect-ratio:.49;
-      border-radius:52px;
+
+      border-radius:54px;
       padding:12px;
+
       background:#0B1220;
+
       box-shadow:
         0 44px 90px rgba(11,18,32,.34),
         inset 0 0 0 1px rgba(255,255,255,.14);
+
       position:relative;
       z-index:2;
     }
 
     .screen{
+      width:100%;
       height:100%;
-      background:#fff;
-      border-radius:40px;
+      border-radius:42px;
       overflow:hidden;
-      position:relative;
+      background:white;
     }
 
-    .notch{
-      position:absolute;
-      top:16px;
-      left:50%;
-      transform:translateX(-50%);
-      width:96px;
-      height:27px;
-      border-radius:999px;
-      background:#0B1220;
-      z-index:3;
-    }
-
-    .status{
-      position:absolute;
-      top:18px;
-      left:38px;
-      right:38px;
-      z-index:4;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      font-size:13px;
-      font-weight:760;
-      color:var(--navy);
-    }
-
-    .signal{
-      display:flex;
-      align-items:center;
-      gap:4px;
-    }
-
-    .signal span{
-      width:4px;
-      height:8px;
-      border-radius:999px;
-      background:var(--navy);
-      display:block;
-    }
-
-    .mock-screen{
+    .real-screen{
+      width:100%;
       height:100%;
-      padding:68px 20px 80px;
-      background:linear-gradient(#fff,#F7F9FC);
-    }
-
-    .screen-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:16px;
-    }
-
-    .screen-title{
-      font-size:27px;
-      line-height:1;
-      font-weight:850;
-      letter-spacing:-.055em;
-      margin-bottom:8px;
-    }
-
-    .screen-subtitle{
-      color:#697386;
-      font-size:13px;
-    }
-
-    .plus{
-      width:40px;
-      height:40px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      font-size:25px;
-      color:var(--blue);
-      background:white;
-      border:1px solid #EDF1F7;
-      box-shadow:0 10px 24px rgba(11,18,32,.08);
-    }
-
-    .card{
-      min-height:142px;
-      border-radius:22px;
-      padding:20px;
-      color:white;
-      background:
-        radial-gradient(circle at 82% 25%,rgba(31,95,191,.48),transparent 42%),
-        linear-gradient(135deg,#0B1220,#101B34);
-      margin-bottom:14px;
-      box-shadow:0 18px 36px rgba(11,18,32,.24);
-    }
-
-    .card-label{
-      font-size:12px;
-      opacity:.72;
-      letter-spacing:.03em;
-      margin-bottom:34px;
-    }
-
-    .card-name{
-      font-size:18px;
-      font-weight:780;
-      letter-spacing:-.035em;
-      margin-bottom:24px;
-    }
-
-    .card-digits{
-      font-size:13px;
-      opacity:.82;
-    }
-
-    .mini-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-bottom:14px;
-    }
-
-    .mini{
-      border:1px solid #E7ECF4;
-      border-radius:18px;
-      padding:14px;
-      background:white;
-      box-shadow:0 10px 24px rgba(11,18,32,.05);
-    }
-
-    .mini-label{
-      font-size:12px;
-      color:#637083;
-      margin-bottom:8px;
-    }
-
-    .mini-value{
-      font-size:24px;
-      font-weight:850;
-      letter-spacing:-.05em;
-    }
-
-    .recommend{
-      border-radius:20px;
-      background:#EEF5FF;
-      border:1px solid #DCE9FF;
-      padding:15px 16px;
-      margin-bottom:18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    .recommend-title{
-      font-size:14px;
-      font-weight:820;
-      margin-bottom:5px;
-    }
-
-    .recommend-copy{
-      font-size:12px;
-      line-height:1.35;
-      color:#58657A;
-    }
-
-    .recommend-icon{
-      width:38px;
-      height:38px;
-      border-radius:999px;
-      display:grid;
-      place-items:center;
-      background:white;
-      color:var(--blue);
-      font-weight:900;
-      flex:0 0 auto;
+      object-fit:cover;
+      display:block;
     }
 
     .copy{
@@ -337,52 +161,55 @@
     .eyebrow{
       display:inline-flex;
       align-items:center;
-      padding:9px 16px;
+
+      padding:10px 18px;
       border-radius:999px;
+
       background:var(--soft-blue);
       color:var(--blue);
+
       font-size:14px;
       font-weight:820;
-      letter-spacing:.01em;
-      margin-bottom:24px;
       text-transform:uppercase;
+
+      margin-bottom:26px;
     }
 
-   h1{
+    h1{
+      margin:0 0 22px;
 
-  margin:0 0 28px;
+      font-size:clamp(58px,5.2vw,82px);
+      line-height:.98;
 
-  font-size:72px;
+      font-weight:850;
 
-  line-height:1.02;
+      letter-spacing:-0.045em;
 
-  letter-spacing:-0.035em;
+      color:var(--navy);
 
-  font-weight:900;
-
-  color:var(--navy);
-
-  max-width:700px;
-
-}
+      max-width:720px;
+    }
 
     h1 .blue{
       color:var(--blue);
     }
 
     .subhead{
-      margin:0 0 30px;
+      margin:0 0 32px;
+
       font-size:22px;
       line-height:1.38;
+
       color:var(--muted);
+
       max-width:620px;
     }
 
     .benefits{
       display:grid;
       gap:16px;
+      margin-bottom:30px;
       max-width:620px;
-      margin-bottom:26px;
     }
 
     .benefit{
@@ -395,27 +222,36 @@
     .benefit-icon{
       width:54px;
       height:54px;
+
       border-radius:50%;
+
       display:grid;
       place-items:center;
+
       background:#EAF2FF;
+
       color:var(--blue);
-      font-weight:850;
+
       font-size:22px;
+      font-weight:850;
     }
 
     .benefit h2{
       margin:0 0 4px;
+
       font-size:19px;
       line-height:1.16;
-      letter-spacing:-.035em;
+
+      letter-spacing:-.02em;
     }
 
     .benefit p{
       margin:0;
+
       color:var(--muted);
+
       font-size:15px;
-      line-height:1.35;
+      line-height:1.4;
     }
 
     .cta{
@@ -423,31 +259,42 @@
       align-items:center;
       gap:18px;
       flex-wrap:wrap;
-      margin-top:4px;
     }
 
     .download{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:11px;
+      gap:12px;
+
       min-width:300px;
       height:60px;
-      padding:0 28px;
+
+      padding:0 30px;
+
       border-radius:16px;
+
       background:var(--navy);
       color:white;
+
       text-decoration:none;
+
       font-size:18px;
       font-weight:820;
-      letter-spacing:-.035em;
+
+      letter-spacing:-.02em;
+
       box-shadow:0 20px 48px rgba(11,18,32,.22);
+
+      transition:transform .15s ease;
+    }
+
+    .download:hover{
+      transform:translateY(-2px);
     }
 
     .apple{
-      font-size:25px;
-      line-height:1;
-      transform:translateY(-1px);
+      font-size:24px;
     }
 
     .free-note{
@@ -457,7 +304,10 @@
 
     footer{
       border-top:1px solid rgba(11,18,32,.10);
+
       padding-top:18px;
+      margin-top:8px;
+
       font-size:13px;
       color:var(--muted);
     }
@@ -474,23 +324,42 @@
     }
 
     @media(max-width:1000px){
+
       body{
         overflow:auto;
       }
 
       .page{
-        height:auto;
-        min-height:100vh;
         padding:22px 20px;
       }
 
       main{
         grid-template-columns:1fr;
-        gap:26px;
+        gap:36px;
+      }
+
+      .phone-stage{
+        order:-1;
+        min-height:auto;
+      }
+
+      .phone{
+        width:290px;
+        min-width:290px;
       }
 
       h1{
-        font-size:48px;
+        font-size:50px;
+      }
+
+      .subhead{
+        font-size:18px;
+      }
+
+      footer{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
       }
     }
 
@@ -502,16 +371,18 @@
   <div class="page">
 
     <header>
+
       <div class="brand">
-        <div class="brand-logo-wrap">
-          <img class="brand-logo" src="assets/shufl-logo.png" alt="Shufl logo" />
-        </div>
-        <span>shufl</span>
+        <img src="assets/shufl-logo.png" alt="Shufl logo" />
       </div>
 
-      <a class="support" href="mailto:support@shuflcredit.app">
+      <a
+        class="support"
+        href="mailto:support@shuflcredit.app"
+      >
         support@shuflcredit.app
       </a>
+
     </header>
 
     <main>
@@ -525,36 +396,11 @@
 
           <div class="screen">
 
-            <div class="status">
-              <span>9:41</span>
-
-              <span class="signal">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </div>
-
-            <div class="notch"></div>
-
-          <img class="real-screen" src="assets/shufl-screen.png" alt="Shufl app screenshot" />
-
-              <div class="tab">
-                <div class="tab-icon"></div>
-                Stack
-              </div>
-
-              <div class="tab">
-                <div class="tab-icon"></div>
-                Optimize
-              </div>
-
-              <div class="tab">
-                <div class="tab-icon"></div>
-                Profile
-              </div>
-
-            </div>
+            <img
+              class="real-screen"
+              src="assets/shufl-screen.png"
+              alt="Shufl app screenshot"
+            />
 
           </div>
 
@@ -580,7 +426,6 @@
 
           <article class="benefit">
             <div class="benefit-icon">▣</div>
-
             <div>
               <h2>Track every card</h2>
               <p>
@@ -591,7 +436,6 @@
 
           <article class="benefit">
             <div class="benefit-icon">✦</div>
-
             <div>
               <h2>Know which card to use</h2>
               <p>
@@ -602,18 +446,16 @@
 
           <article class="benefit">
             <div class="benefit-icon">⌁</div>
-
             <div>
               <h2>Stay under 5/24</h2>
               <p>
-                Monitor your card opening history and plan future applications with more confidence.
+                Monitor your card opening history and plan future applications with confidence.
               </p>
             </div>
           </article>
 
           <article class="benefit">
             <div class="benefit-icon">≋</div>
-
             <div>
               <h2>Stack</h2>
               <p>
@@ -624,7 +466,6 @@
 
           <article class="benefit">
             <div class="benefit-icon">◎</div>
-
             <div>
               <h2>Household Optimization</h2>
               <p>
@@ -637,7 +478,10 @@
 
         <div class="cta">
 
-          <a class="download" href="PASTE_YOUR_APP_STORE_LINK_HERE">
+          <a
+            class="download"
+            href="PASTE_YOUR_APP_STORE_LINK_HERE"
+          >
             <span class="apple"></span>
             <span>Download on the App Store</span>
           </a>
@@ -659,9 +503,19 @@
       </div>
 
       <div class="footer-links">
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms of Use</a>
-        <a href="mailto:support@shuflcredit.app">Support</a>
+
+        <a href="/privacy">
+          Privacy Policy
+        </a>
+
+        <a href="/terms">
+          Terms of Use
+        </a>
+
+        <a href="mailto:support@shuflcredit.app">
+          Support
+        </a>
+
       </div>
 
     </footer>
