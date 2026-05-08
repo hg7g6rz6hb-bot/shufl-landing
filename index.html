@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shufl Credit — Get more from every card in your wallet</title>
+  <meta name="description" content="Shufl helps you track cards, monitor bonuses, understand 5/24, and know which card to use — all in one calm, simple app." />
+  <style>
+    :root{--navy:#0B1220;--blue:#1F5FBF;--soft-blue:#EAF2FF;--text:#0B1220;--muted:#566174;--border:#E2E8F0}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at 18% 36%,rgba(31,95,191,.14),transparent 34%),radial-gradient(circle at 82% 72%,rgba(11,18,32,.08),transparent 36%),linear-gradient(135deg,#fff 0%,#F8FAFD 56%,#EEF5FF 100%)}
+    body{overflow:hidden}
+    .page{height:100vh;width:100vw;padding:30px 42px 22px;display:grid;grid-template-rows:auto 1fr auto}
+    header,footer{display:flex;justify-content:space-between;align-items:center;gap:20px;position:relative;z-index:5}
+    .brand{display:flex;align-items:center;gap:14px;font-size:27px;font-weight:850;letter-spacing:-.06em;color:var(--navy)}
+    .brand-logo-wrap{width:48px;height:48px;border-radius:14px;background:var(--navy);display:grid;place-items:center;overflow:hidden;box-shadow:0 14px 32px rgba(11,18,32,.18)}
+    .brand-logo{width:100%;height:100%;object-fit:cover;display:block}
+    .support{color:var(--muted);text-decoration:none;font-size:15px;font-weight:650}
+    main{max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:.88fr 1.12fr;align-items:center;gap:80px;min-height:0}
+    .phone-stage{display:grid;place-items:center;min-height:610px;position:relative}
+    .phone-glow{position:absolute;width:460px;height:460px;border-radius:999px;background:rgba(31,95,191,.14);filter:blur(44px)}
+    .phone-shadow{position:absolute;bottom:16px;width:310px;height:30px;border-radius:50%;background:rgba(11,18,32,.2);filter:blur(20px);z-index:1}
+    .phone{width:min(350px,32vw);min-width:310px;aspect-ratio:.49;border-radius:52px;padding:12px;background:#0B1220;box-shadow:0 44px 90px rgba(11,18,32,.34),inset 0 0 0 1px rgba(255,255,255,.14);position:relative;z-index:2}
+    .screen{height:100%;background:#fff;border-radius:40px;overflow:hidden;position:relative}
+    .notch{position:absolute;top:16px;left:50%;transform:translateX(-50%);width:96px;height:27px;border-radius:999px;background:#0B1220;z-index:3}
+    .status{position:absolute;top:18px;left:38px;right:38px;z-index:4;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:760;color:var(--navy)}
+    .signal{display:flex;align-items:center;gap:4px}.signal span{width:4px;height:8px;border-radius:999px;background:var(--navy);display:block}
+    .mock-screen{height:100%;padding:68px 20px 80px;background:linear-gradient(#fff,#F7F9FC)}
+    .screen-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .screen-title{font-size:27px;line-height:1;font-weight:850;letter-spacing:-.055em;margin-bottom:8px}
+    .screen-subtitle{color:#697386;font-size:13px}
+    .plus{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:25px;color:var(--blue);background:white;border:1px solid #EDF1F7;box-shadow:0 10px 24px rgba(11,18,32,.08)}
+    .card{min-height:142px;border-radius:22px;padding:20px;color:white;background:radial-gradient(circle at 82% 25%,rgba(31,95,191,.48),transparent 42%),linear-gradient(135deg,#0B1220,#101B34);margin-bottom:14px;box-shadow:0 18px 36px rgba(11,18,32,.24)}
+    .card-label{font-size:12px;opacity:.72;letter-spacing:.03em;margin-bottom:34px}.card-name{font-size:18px;font-weight:780;letter-spacing:-.035em;margin-bottom:24px}.card-digits{font-size:13px;opacity:.82}
+    .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.mini{border:1px solid #E7ECF4;border-radius:18px;padding:14px;background:white;box-shadow:0 10px 24px rgba(11,18,32,.05)}.mini-label{font-size:12px;color:#637083;margin-bottom:8px}.mini-value{font-size:24px;font-weight:850;letter-spacing:-.05em}
+    .recommend{border-radius:20px;background:#EEF5FF;border:1px solid #DCE9FF;padding:15px 16px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}.recommend-title{font-size:14px;font-weight:820;margin-bottom:5px}.recommend-copy{font-size:12px;line-height:1.35;color:#58657A}.recommend-icon{width:38px;height:38px;border-radius:999px;display:grid;place-items:center;background:white;color:var(--blue);font-weight:900;flex:0 0 auto}
+    .activity-title{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:820;margin-bottom:10px}.activity-title span{color:var(--blue);font-size:11px;font-weight:720}.activity{display:grid;gap:9px}.activity-row{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding-bottom:9px;border-bottom:1px solid #EEF1F6}.activity-icon{width:34px;height:34px;border-radius:50%;background:#EAF2FF;color:var(--blue);display:grid;place-items:center;font-size:14px;font-weight:850}.activity-name{font-size:12px;font-weight:780;margin-bottom:3px}.activity-meta{font-size:10.5px;color:#697386}.activity-amt{text-align:right;font-size:11.5px;font-weight:760}.activity-amt span{display:block;color:#7B8494;font-size:10px;font-weight:600;margin-top:3px}
+    .tabs{position:absolute;left:0;right:0;bottom:0;height:68px;background:rgba(255,255,255,.94);border-top:1px solid #EBEEF4;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:0 10px}.tab{text-align:center;font-size:10px;color:#7A8495;font-weight:650}.tab-icon{width:20px;height:20px;border-radius:6px;background:#EAF2FF;margin:0 auto 5px}.tab.active{color:var(--blue)}.tab.active .tab-icon{background:var(--blue)}
+    .copy{max-width:690px}.eyebrow{display:inline-flex;align-items:center;padding:9px 16px;border-radius:999px;background:var(--soft-blue);color:var(--blue);font-size:14px;font-weight:820;letter-spacing:.01em;margin-bottom:26px;text-transform:uppercase}
+    h1{margin:0 0 22px;font-size:clamp(56px,5.2vw,80px);line-height:.96;letter-spacing:-.08em;color:var(--navy);max-width:710px}h1 .blue{color:var(--blue)}
+    .subhead{margin:0 0 30px;font-size:22px;line-height:1.38;color:var(--muted);max-width:620px}
+    .benefits{display:grid;gap:16px;max-width:620px;margin-bottom:26px}.benefit{display:grid;grid-template-columns:54px 1fr;gap:18px;align-items:start}.benefit-icon{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#EAF2FF;color:var(--blue);font-weight:850;font-size:22px}.benefit h2{margin:0 0 4px;font-size:19px;line-height:1.16;letter-spacing:-.035em}.benefit p{margin:0;color:var(--muted);font-size:15px;line-height:1.35}
+    .cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:4px}.download{display:inline-flex;align-items:center;justify-content:center;gap:11px;min-width:300px;height:60px;padding:0 28px;border-radius:16px;background:var(--navy);color:white;text-decoration:none;font-size:18px;font-weight:820;letter-spacing:-.035em;box-shadow:0 20px 48px rgba(11,18,32,.22);transition:transform 160ms ease,box-shadow 160ms ease}.apple{font-size:25px;line-height:1;transform:translateY(-1px)}.download:hover{transform:translateY(-2px);box-shadow:0 24px 56px rgba(11,18,32,.28)}.free-note{color:var(--muted);font-size:15px}
+    footer{border-top:1px solid rgba(11,18,32,.10);padding-top:18px;font-size:13px;color:var(--muted)}.footer-links{display:flex;align-items:center;gap:28px}.footer-links a{color:var(--muted);text-decoration:none}.footer-links a:hover,.support:hover{color:var(--navy)}
+    @media(max-width:1000px){body{overflow:auto}.page{height:auto;min-height:100vh;padding:22px 20px}main{grid-template-columns:1fr;gap:26px;padding:32px 0 36px}.phone-stage{min-height:500px;order:-1}.phone{width:282px;min-width:282px}h1{font-size:48px}.subhead{font-size:18px}.benefits{gap:15px}footer{flex-direction:column;align-items:flex-start}.footer-links{gap:18px;flex-wrap:wrap}}
+    @media(max-height:790px) and (min-width:1001px){.page{padding-top:20px;padding-bottom:16px}.phone-stage{min-height:540px}.phone{width:308px;min-width:308px}h1{font-size:61px}.subhead{font-size:19px;margin-bottom:22px}.eyebrow{margin-bottom:18px}.benefits{gap:12px;margin-bottom:20px}.benefit-icon{width:48px;height:48px;font-size:19px}.benefit{grid-template-columns:48px 1fr;gap:15px}.benefit h2{font-size:17px}.benefit p{font-size:14px}.download{height:56px}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="brand-logo-wrap"><img class="brand-logo" src="assets/shufl-logo.png" alt="Shufl logo" /></div>
+        <span>shufl</span>
+      </div>
+      <a class="support" href="mailto:support@shuflcredit.app">support@shuflcredit.app</a>
+    </header>
+
+    <main>
+      <section class="phone-stage" aria-label="Shufl app preview">
+        <div class="phone-glow"></div><div class="phone-shadow"></div>
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="signal"><span></span><span></span><span></span></span></div>
+          <div class="notch"></div>
+          <div class="mock-screen">
+            <div class="screen-head"><div><div class="screen-title">Cards</div><div class="screen-subtitle">Your wallet, organized.</div></div><div class="plus">+</div></div>
+            <div class="card"><div class="card-label">SHUFL WALLET</div><div class="card-name">Premium Rewards Card</div><div class="card-digits">•••• 1234</div></div>
+            <div class="mini-grid"><div class="mini"><div class="mini-label">5/24 Status</div><div class="mini-value">2/5</div></div><div class="mini"><div class="mini-label">Bonus Tracker</div><div class="mini-value">42d</div></div></div>
+            <div class="recommend"><div><div class="recommend-title">Best card for dining</div><div class="recommend-copy">Use your strongest rewards card for this category.</div></div><div class="recommend-icon">4x</div></div>
+            <div class="activity-title"><strong>Recent Activity</strong><span>View all</span></div>
+            <div class="activity">
+              <div class="activity-row"><div class="activity-icon">☕</div><div><div class="activity-name">Blue Bottle Coffee</div><div class="activity-meta">Dining · 4x points</div></div><div class="activity-amt">$6.75<span>Today</span></div></div>
+              <div class="activity-row"><div class="activity-icon">🛒</div><div><div class="activity-name">Whole Foods</div><div class="activity-meta">Groceries · 4x points</div></div><div class="activity-amt">$87.64<span>Yesterday</span></div></div>
+              <div class="activity-row"><div class="activity-icon">✈</div><div><div class="activity-name">Travel Purchase</div><div class="activity-meta">Travel · 2x points</div></div><div class="activity-amt">$436.21<span>2 days ago</span></div></div>
+            </div>
+          </div>
+          <div class="tabs"><div class="tab active"><div class="tab-icon"></div>Cards</div><div class="tab"><div class="tab-icon"></div>Stack</div><div class="tab"><div class="tab-icon"></div>Optimize</div><div class="tab"><div class="tab-icon"></div>Profile</div></div>
+        </div></div>
+      </section>
+
+      <section class="copy" aria-label="Shufl overview">
+        <div class="eyebrow">Credit card optimization, simplified</div>
+        <h1>Get more from <span class="blue">every</span> card in your wallet.</h1>
+        <p class="subhead">Shufl helps you track cards, monitor bonuses, understand 5/24, and know which card to use — all in one calm, simple app.</p>
+        <div class="benefits">
+          <article class="benefit"><div class="benefit-icon">▣</div><div><h2>Track every card</h2><p>Organize personal and business cards, annual fees, open dates, and bonus deadlines.</p></div></article>
+          <article class="benefit"><div class="benefit-icon">✦</div><div><h2>Know which card to use</h2><p>See the best card for each spending category using clear, deterministic logic.</p></div></article>
+          <article class="benefit"><div class="benefit-icon">⌁</div><div><h2>Stay under 5/24</h2><p>Monitor your card opening history and plan future applications with more confidence.</p></div></article>
+          <article class="benefit"><div class="benefit-icon">≋</div><div><h2>Stack</h2><p>Curated credit card signals without the noisy sales clutter.</p></div></article>
+          <article class="benefit"><div class="benefit-icon">◎</div><div><h2>Household Optimization</h2><p>Coordinate cards with your partner and know who should pay.</p></div></article>
+        </div>
+        <div class="cta"><a class="download" href="PASTE_YOUR_APP_STORE_LINK_HERE"><span class="apple"></span><span>Download on the App Store</span></a><span class="free-note">Shufl Credit is free to download.</span></div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© 2026 Shufl Credit. All rights reserved.</div>
+      <div class="footer-links"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a><a href="mailto:support@shuflcredit.app">Support</a></div>
+    </footer>
+  </div>
+</body>
+</html>
